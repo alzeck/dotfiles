@@ -1,4 +1,4 @@
-function ColorMyPencils(color) 
+function ColorMyPencils(color)
     color = color or "rose-pine"
     vim.cmd.colorscheme(color)
 
@@ -8,3 +8,13 @@ end
 
 ColorMyPencils()
 
+require("colorizer").setup {
+    filetypes = { "*" },
+    user_default_options = {
+      css = true,
+      mode = "background",
+      tailwind = true,
+      virtualtext = "■",
+      always_update = true
+    },
+}

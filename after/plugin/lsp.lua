@@ -7,6 +7,7 @@ lsp.ensure_installed({
   'rust_analyzer',
   'tailwindcss',
   'eslint',
+  'jsonls'
 })
 
 -- Fix Undefined global 'vim'
@@ -32,6 +33,9 @@ cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
+  formatting = {
+    format = require("tailwindcss-colorizer-cmp").formatter
+  },
   mapping = cmp_mappings
 })
 
@@ -58,8 +62,6 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
-  require("tailwindcss-colors").buf_attach(bufnr)
 end)
 
 lsp.setup()
