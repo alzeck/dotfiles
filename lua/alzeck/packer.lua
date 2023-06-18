@@ -58,7 +58,6 @@ return require('packer').startup(function(use)
 
 			-- Formatters
 			{'jose-elias-alvarez/null-ls.nvim'},
-			{'MunifTanjim/prettier.nvim'},
 
 		  -- Autocompletion
 		  {'hrsh7th/nvim-cmp'},
@@ -89,4 +88,12 @@ return require('packer').startup(function(use)
 		end
 	})
 	use 'NvChad/nvim-colorizer.lua'
+
+  use({
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {}
+    end,
+  })
 end)
+
