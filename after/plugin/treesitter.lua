@@ -21,8 +21,4 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 
-require'nvim-treesitter'.define_modules {
-    ts_templates = {
-        module_path = "alzeck/ts_templates"
-    }
-}
+
