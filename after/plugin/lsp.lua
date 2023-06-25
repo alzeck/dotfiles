@@ -7,7 +7,8 @@ lsp.ensure_installed({
   'rust_analyzer',
   'tailwindcss',
   'eslint',
-  'jsonls'
+  'jsonls',
+  'elixirls'
 })
 
 -- Fix Undefined global 'vim'

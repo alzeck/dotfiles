@@ -7,6 +7,10 @@ local async = event == "BufWritePost"
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.autopep8,
+    null_ls.builtins.formatting.mix,
+    null_ls.builtins.diagnostics.credo
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -56,4 +60,5 @@ prettier.setup({
     "yaml",
   },
 })
-]]--
+]]
+--
