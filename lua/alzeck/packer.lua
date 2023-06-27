@@ -25,6 +25,8 @@ return require('packer').startup(function(use)
     end
   })
 
+  use 'f-person/auto-dark-mode.nvim'
+
   use({
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -44,7 +46,8 @@ return require('packer').startup(function(use)
       local ts_update = require('nvim-treesitter.install')
           .update({ with_sync = true })
       ts_update()
-    end, }
+    end,
+  }
   use("nvim-treesitter/playground")
   use("theprimeagen/harpoon")
   use("theprimeagen/refactoring.nvim")
@@ -82,6 +85,7 @@ return require('packer').startup(function(use)
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
+  use("lewis6991/gitsigns.nvim")
 
   use({
     "roobert/tailwindcss-colorizer-cmp.nvim",
