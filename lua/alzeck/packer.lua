@@ -27,9 +27,10 @@ return require('packer').startup(function(use)
 
   use 'f-person/auto-dark-mode.nvim'
 
+  use 'nvim-tree/nvim-web-devicons'
+
   use({
     "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("trouble").setup {
         icons = true,
@@ -48,6 +49,7 @@ return require('packer').startup(function(use)
       ts_update()
     end,
   }
+
   use("nvim-treesitter/playground")
   use("theprimeagen/harpoon")
   use("theprimeagen/refactoring.nvim")
