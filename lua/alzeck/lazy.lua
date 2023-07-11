@@ -85,13 +85,13 @@ local plugins = {
     }
   },
 
-  ("folke/zen-mode.nvim"),
-  ("github/copilot.vim"),
-  ("eandrju/cellular-automaton.nvim"),
-  ("laytan/cloak.nvim"),
-  ("lewis6991/gitsigns.nvim"),
+  "folke/zen-mode.nvim",
+  "github/copilot.vim",
+  "eandrju/cellular-automaton.nvim",
+  "laytan/cloak.nvim",
+  "lewis6991/gitsigns.nvim",
 
-  ({
+  {
     "roobert/tailwindcss-colorizer-cmp.nvim",
     -- optionally, override the default options:
     config = function()
@@ -99,9 +99,9 @@ local plugins = {
         color_square_width = 2,
       })
     end
-  }),
-  'NvChad/nvim-colorizer.lua',
+  },
 
+  'NvChad/nvim-colorizer.lua',
 
   {
     'numToStr/Comment.nvim',
