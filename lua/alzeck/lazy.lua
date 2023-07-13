@@ -15,7 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   -- Telescope
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.2',
     -- or                            , branch = '0.1.x',
     dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
@@ -65,7 +66,22 @@ local plugins = {
     dependencies = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
+      {
+        'williamboman/mason.nvim',
+        build = ':MasonUpdate',
+        config = function()
+          require("mason").setup({
+            ui = {
+              border = "rounded",
+              icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+              }
+            }
+          })
+        end
+      },
       { 'williamboman/mason-lspconfig.nvim' },
 
       -- Formatters
@@ -111,6 +127,10 @@ local plugins = {
   },
 }
 
-local opts = {}
+local opts = {
+  ui = {
+    border = "rounded",
+  },
+}
 
 require("lazy").setup(plugins, opts)

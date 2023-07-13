@@ -6,7 +6,6 @@ lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
   'tailwindcss',
-  'eslint',
   'jsonls',
   'elixirls'
 })
@@ -20,8 +19,12 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.autopep8,
+    null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.mix,
-    null_ls.builtins.diagnostics.credo
+    null_ls.builtins.diagnostics.credo,
+    null_ls.builtins.diagnostics.eslint,
+
+
   },
 })
 
@@ -31,14 +34,13 @@ lsp.format_on_save({
     timeout_ms = 10000,
   },
   servers = {
-    ['lua_ls'] = { 'lua' },
     ['rust_analyzer'] = { 'rust' },
     -- if you have a working setup with null-ls
     -- you can specify filetypes it can format.
     ['null-ls'] = {
       'markdown', 'graphql', 'html', 'css', 'scss', 'less', 'yaml',
       'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
-      'markdown.mdx', 'python', 'elixir', 'json', 'jsonc', 'vue'
+      'markdown.mdx', 'python', 'elixir', 'json', 'jsonc', 'vue', 'lua'
     },
   }
 })
