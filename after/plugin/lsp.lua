@@ -23,8 +23,6 @@ null_ls.setup({
     null_ls.builtins.formatting.mix,
     null_ls.builtins.diagnostics.credo,
     null_ls.builtins.diagnostics.eslint,
-
-
   },
 })
 
@@ -40,7 +38,8 @@ lsp.format_on_save({
     ['null-ls'] = {
       'markdown', 'graphql', 'html', 'css', 'scss', 'less', 'yaml',
       'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
-      'markdown.mdx', 'python', 'elixir', 'json', 'jsonc', 'vue', 'lua'
+      'markdown.mdx', 'python', 'elixir', 'json', 'jsonc', 'vue', 'lua',
+      'svelte'
     },
   }
 })
