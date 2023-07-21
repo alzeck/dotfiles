@@ -18,4 +18,6 @@ require("cloak").setup({
       cloak_pattern = "=.+"
     },
   },
-})
+}) 
+
+vim.keymap.set("n", "<leader>ct", "<cmd>:CloakToggle<cr>", { noremap = true, silent = true })
