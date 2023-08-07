@@ -1,38 +1,4 @@
 return {
-  -- Telescope
-  {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
-    -- or                            , branch = '0.1.x',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
-  },
-  -- Theming
-  {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    config = function()
-      require('rose-pine').setup({
-        disable_background = true,
-        disable_float_background = true,
-      })
-    end
-  },
-
-  'f-person/auto-dark-mode.nvim',
-
-  'nvim-tree/nvim-web-devicons',
-
-  {
-    "folke/trouble.nvim",
-    config = function()
-      require("trouble").setup {
-        icons = true,
-        -- your configuration comes here
-        -- or leave it empty to , the default settings
-        -- refer to the configuration section below
-      }
-    end
-  },
 
   {
     'nvim-treesitter/nvim-treesitter',
@@ -40,10 +6,11 @@ return {
   },
 
   "nvim-treesitter/playground",
-  "theprimeagen/harpoon",
   "theprimeagen/refactoring.nvim",
-  "mbbill/undotree",
-  "tpope/vim-fugitive",
+  {
+    "mbbill/undotree",
+    keys = { { "<leader>u", ":UndotreeToggle <CR>" } },
+  },
   "nvim-treesitter/nvim-treesitter-context",
 
   {
@@ -88,9 +55,6 @@ return {
   },
 
   "github/copilot.vim",
-  "eandrju/cellular-automaton.nvim",
-  "laytan/cloak.nvim",
-  "lewis6991/gitsigns.nvim",
 
   {
     "roobert/tailwindcss-colorizer-cmp.nvim",
@@ -101,45 +65,25 @@ return {
       })
     end
   },
-
-  'NvChad/nvim-colorizer.lua',
+  {
+    'NvChad/nvim-colorizer.lua',
+    config = function()
+      require("colorizer").setup {
+        filetypes = { "*" },
+        user_default_options = {
+          css = true,
+          mode = "background",
+          tailwind = true,
+          virtualtext = "■",
+          always_update = true
+        },
+      }
+    end
+  },
   {
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
-    end
-  },
-
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    event = 'ColorScheme',
-    config = function()
-      require('lualine').setup({
-        options = {
-          -- @usage 'rose-pine' | 'rose-pine-alt'
-          theme = 'rose-pine-alt',
-        },
-        sections = {
-          lualine_b = { 'branch', 'diff' },
-          lualine_c = {
-            {
-              'filename',
-              path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-            },
-            'diagnostics'
-          },
-
-          lualine_x = { 'filetype' },
-          lualine_y = {},
-        }
-      })
-    end
-  },
-  {
-    "lukas-reineke/virt-column.nvim",
-    config = function()
-      require("virt-column").setup()
     end
   },
 }
