@@ -28,13 +28,7 @@ return {
           symbol = " ",
           highlight = "NeoTreeModified",
         },
-        -- -- icon = {
-        --   folder_closed = "",
-        --   folder_open = "",
-        --   folder_empty = "",
-        --   folder_empty_open = "",
-        -- },
-        git_status = {
+       git_status = {
           symbols = {
             -- Change type
             added = "",
@@ -69,33 +63,6 @@ return {
           },
         },
       },
-      event_handlers = {
-        -- {
-        --     event = "file_opened",
-        --     handler = function()
-        --         --auto close
-        --         require("neo-tree").close_all()
-        --     end,
-        -- },
-        -- {
-        --   event = "neo_tree_window_after_open",
-        --   handler = function(args)
-        --     if args.position == "left" or args.position == "right" then
-        --       vim.cmd("wincmd =")
-        --     end
-        --   end,
-        -- },
-        -- {
-        --   event = "neo_tree_window_after_close",
-        --   handler = function(args)
-        --     if args.position == "left" or args.position == "right" then
-        --       vim.cmd("wincmd =")
-        --     end
-        --   end,
-        -- },
-      },
     })
   end
 }
-
-
