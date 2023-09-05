@@ -115,7 +115,7 @@ end)
 lsp.configure("tailwindcss", {
 	settings = {
 		tailwindCSS = {
-			classAttributes = { "classNames" },
+			classAttributes = { "class", "className", "classNames" },
 			experimental = {
 				classRegex = {
 					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
@@ -126,8 +126,24 @@ lsp.configure("tailwindcss", {
 	},
 })
 
-lsp.setup()
+local function organize_imports()
+	local params = {
+		command = "_typescript.organizeImports",
+		arguments = { vim.api.nvim_buf_get_name(0) },
+	}
+	vim.lsp.buf.execute_command(params)
+end
 
+lsp.configure("tsserver", {
+	commands = {
+		OrganizeImports = {
+			organize_imports,
+			description = "Organize Imports",
+		},
+	},
+})
+
+lsp.setup()
 vim.diagnostic.config({
 	virtual_text = true,
 })
