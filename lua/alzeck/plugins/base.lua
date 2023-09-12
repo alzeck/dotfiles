@@ -47,18 +47,18 @@ return {
 				hint = "⚑",
 				info = "󰋽",
 			})
-			vim.diagnostic.config({
-				virtual_text = false,
-				severity_sort = true,
-				float = {
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-				},
-			})
-
+			-- vim.diagnostic.config({
+			-- 	virtual_text = false,
+			-- 	severity_sort = true,
+			-- 	float = {
+			-- 		style = "minimal",
+			-- 		border = "rounded",
+			-- 		source = "always",
+			-- 		header = "",
+			-- 		prefix = "",
+			-- 	},
+			-- })
+			--
 			lsp_zero.on_attach(function(client, bufnr)
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
