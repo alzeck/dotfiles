@@ -101,7 +101,7 @@ return {
 		"NvChad/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup({
-				filetypes = { "*" },
+				filetypes = { "css", "typescript", "typescriptreact" },
 				user_default_options = {
 					css = true,
 					mode = "background",

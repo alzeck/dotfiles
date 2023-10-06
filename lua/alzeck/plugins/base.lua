@@ -47,18 +47,7 @@ return {
 				hint = "⚑",
 				info = "󰋽",
 			})
-			-- vim.diagnostic.config({
-			-- 	virtual_text = false,
-			-- 	severity_sort = true,
-			-- 	float = {
-			-- 		style = "minimal",
-			-- 		border = "rounded",
-			-- 		source = "always",
-			-- 		header = "",
-			-- 		prefix = "",
-			-- 	},
-			-- })
-			--
+
 			lsp_zero.on_attach(function(client, bufnr)
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
@@ -79,11 +68,7 @@ return {
 						"graphql",
 						"html",
 						"css",
-						"scss",
-						"less",
 						"yaml",
-						"javascript",
-						"javascriptreact",
 						"typescript",
 						"typescriptreact",
 						"markdown.mdx",
@@ -108,6 +93,10 @@ return {
 				},
 				handlers = {
 					lsp_zero.default_setup,
+					lua_ls = function()
+						local lua_opts = lsp_zero.nvim_lua_ls()
+						require("lspconfig").lua_ls.setup(lua_opts)
+					end,
 					tailwindcss = function()
 						require("lspconfig").tailwindcss.setup({
 							settings = {

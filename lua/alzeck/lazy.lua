@@ -12,6 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local opts = {
+  install = {
+    colorscheme = { "rose-pine-moon" },
+  },
   ui = {
     border = "rounded",
   },
