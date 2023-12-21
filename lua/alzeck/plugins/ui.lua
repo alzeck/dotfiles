@@ -4,10 +4,22 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "ColorScheme",
 		config = function()
+			local theme = require("lualine.themes.rose-pine-alt")
+			theme.normal.a.bg = "#00000000"
+			theme.normal.b.bg = "#00000000"
+			theme.normal.c.bg = "#00000000"
+			theme.insert.a.bg = "#00000000"
+			theme.visual.a.bg = "#00000000"
+			theme.replace.a.bg = "#00000000"
+			theme.command.a.bg = "#00000000"
+			theme.inactive.a.bg = "#00000000"
+			theme.inactive.b.bg = "#00000000"
+			theme.inactive.c.bg = "#00000000"
+
 			require("lualine").setup({
 				options = {
 					-- @usage 'rose-pine' | 'rose-pine-alt'
-					theme = "rose-pine-alt",
+					theme = theme,
 				},
 				sections = {
 					lualine_b = { "branch", "diff" },
