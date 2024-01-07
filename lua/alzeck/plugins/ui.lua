@@ -38,13 +38,6 @@ return {
 		end,
 	},
 	{
-		"lukas-reineke/virt-column.nvim",
-		config = function()
-			require("virt-column").setup()
-		end,
-	},
-
-	{
 		"laytan/cloak.nvim",
 		config = function()
 			require("cloak").setup({
@@ -82,10 +75,25 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-context",
+		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all"
-				ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "css", "elixir", "eex" },
+				ensure_installed = {
+					"vimdoc",
+					"javascript",
+					"typescript",
+					"c",
+					"python",
+					"go",
+					"lua",
+					"rust",
+					"css",
+					"elixir",
+					"eex",
+				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
 				sync_install = false,
@@ -93,7 +101,6 @@ return {
 				-- Automatically install missing parsers when entering buffer
 				-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 				auto_install = true,
-
 				highlight = {
 					-- `false` will disable the whole extension
 					enable = true,
@@ -107,8 +114,6 @@ return {
 			})
 		end,
 	},
-	"nvim-treesitter/playground",
-	"nvim-treesitter/nvim-treesitter-context",
 	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()
@@ -120,6 +125,21 @@ return {
 					tailwind = true,
 					virtualtext = "■",
 					always_update = true,
+				},
+			})
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		config = function()
+			require("ibl").setup({
+				indent = { char = "▏" },
+				scope = {
+					enabled = true,
+					highlight = { "Function", "Label" },
+					show_exact_scope = true,
 				},
 			})
 		end,

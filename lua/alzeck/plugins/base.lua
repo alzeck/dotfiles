@@ -89,6 +89,8 @@ return {
 					"rust_analyzer",
 					"tailwindcss",
 					"jsonls",
+					"eslint",
+					"pyright",
 					"elixirls",
 				},
 				handlers = {
@@ -154,7 +156,7 @@ return {
 
 	-- Formatters
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		config = function()
 			local null_ls = require("null-ls")
 
@@ -200,6 +202,8 @@ return {
 			cmp.setup({
 				formatting = lsp_zero.cmp_format(),
 				mapping = cmp.mapping.preset.insert({
+					["<Tab>"] = cmp_action.luasnip_supertab(),
+					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
