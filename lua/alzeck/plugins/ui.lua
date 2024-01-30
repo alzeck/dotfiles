@@ -73,6 +73,20 @@ return {
 		end,
 	},
 	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+		lazy = false,
+		keys = {
+			{ "<leader>tt", "<cmd>TodoTelescope<cr>" },
+			{ "<leader>tq", "<cmd>TodoTrouble<cr>" },
+		},
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		dependencies = {
@@ -94,6 +108,7 @@ return {
 					"elixir",
 					"eex",
 				},
+				ignore_install = {},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
 				sync_install = false,

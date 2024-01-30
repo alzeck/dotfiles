@@ -12,6 +12,7 @@ return {
 				{ "<leader>vh", builtin.help_tags },
 				{ "<leader>gr", builtin.lsp_references },
 				{ "<leader>fb", builtin.buffers },
+				{ "<leader>of", builtin.oldfiles },
 				{ "<leader>fs", builtin.lsp_document_symbols },
 				{ "<leader>qf", builtin.quickfix },
 				{ "<leader>fib", builtin.current_buffer_fuzzy_find },
