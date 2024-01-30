@@ -2,33 +2,20 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "cljoly/telescope-repo.nvim" },
-		config = function()
-			require("telescope").setup({
-				extensions = {
-					repo = {
-						list = {
-							search_dirs = {
-								"~/Projects",
-								"~/.config",
-							},
-						},
-					},
-				},
-			})
-
-			require("telescope").load_extension("repo")
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+		keys = function()
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-			vim.keymap.set("n", "<leader>pp", "<cmd>Telescope repo list<cr>", {})
-			vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
-			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
-			vim.keymap.set("n", "<leader>gr", builtin.lsp_references, {})
-			vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-			vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, {})
-			vim.keymap.set("n", "<leader>qf", builtin.quickfix, {})
-			vim.keymap.set("n", "<leader>fib", builtin.current_buffer_fuzzy_find, {})
+			return {
+				{ "<leader>pf", builtin.find_files },
+				{ "<C-p>", builtin.git_files },
+				{ "<leader>ps", builtin.live_grep },
+				{ "<leader>vh", builtin.help_tags },
+				{ "<leader>gr", builtin.lsp_references },
+				{ "<leader>fb", builtin.buffers },
+				{ "<leader>fs", builtin.lsp_document_symbols },
+				{ "<leader>qf", builtin.quickfix },
+				{ "<leader>fib", builtin.current_buffer_fuzzy_find },
+			}
 		end,
 	},
 	{
@@ -38,31 +25,31 @@ return {
 		config = function()
 			local harpoon = require("harpoon")
 			harpoon:setup({})
-
-			vim.keymap.set("n", "<leader>a", function()
+		end,
+		keys = function()
+			local harpoon = require("harpoon")
+			local append = function()
 				harpoon:list():append()
-			end)
-			vim.keymap.set("n", "<C-e>", function()
-				harpoon.ui:toggle_quick_menu(harpoon:list(), {
-					border = "rounded",
-					title_pos = "center",
-					title = " Harpoon ",
-					ui_max_width = 80,
-				})
-			end)
-
-			vim.keymap.set("n", "<C-a>", function()
-				harpoon:list():select(1)
-			end)
-			vim.keymap.set("n", "<C-s>", function()
-				harpoon:list():select(2)
-			end)
-			vim.keymap.set("n", "<C-d>", function()
-				harpoon:list():select(3)
-			end)
-			vim.keymap.set("n", "<C-f>", function()
-				harpoon:list():select(4)
-			end)
+			end
+			local toggle_quick_menu = function()
+				harpoon.ui:toggle_quick_menu(
+					harpoon:list(),
+					{ border = "rounded", title_pos = "center", title = " Harpoon ", ui_max_width = 80 }
+				)
+			end
+			local pick_window = function(page)
+				return function()
+					harpoon:list():select(page)
+				end
+			end
+			return {
+				{ "<leader>a", append },
+				{ "<C-e>", toggle_quick_menu },
+				{ "<C-a>", pick_window(1) },
+				{ "<C-s>", pick_window(2) },
+				{ "<C-d>", pick_window(3) },
+				{ "<C-f>", pick_window(4) },
+			}
 		end,
 	},
 }

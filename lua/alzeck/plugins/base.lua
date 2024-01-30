@@ -2,14 +2,18 @@ return {
 	{
 		"theprimeagen/refactoring.nvim",
 		config = function()
-			require("refactoring").setup({})
-			vim.api.nvim_set_keymap(
-				"v",
+			require("refactoring").setup({
+				show_success_message = true,
+			})
+		end,
+		keys = {
+			{
 				"<leader>ri",
 				[[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-				{ noremap = true, silent = true, expr = false }
-			)
-		end,
+				mode = "v",
+				{ noremap = true, silent = true, expr = false },
+			},
+		},
 	},
 	{
 		"mbbill/undotree",
