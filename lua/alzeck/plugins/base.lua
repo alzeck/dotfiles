@@ -1,11 +1,9 @@
 return {
 	{
 		"theprimeagen/refactoring.nvim",
-		config = function()
-			require("refactoring").setup({
-				show_success_message = true,
-			})
-		end,
+		opts = {
+			show_success_message = true,
+		},
 		keys = {
 			{
 				"<leader>ri",
@@ -25,7 +23,6 @@ return {
 		lazy = true,
 		config = false,
 		init = function()
-			-- Disable automatic setup, we are doing it manually
 			vim.g.lsp_zero_extend_cmp = 0
 			vim.g.lsp_zero_extend_lspconfig = 0
 		end,
@@ -148,18 +145,16 @@ return {
 		"williamboman/mason.nvim",
 		lazy = false,
 		build = ":MasonUpdate",
-		config = function()
-			require("mason").setup({
-				ui = {
-					border = "rounded",
-					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
-					},
+		opts = {
+			ui = {
+				border = "rounded",
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
 				},
-			})
-		end,
+			},
+		},
 	},
 
 	-- Formatters
@@ -256,8 +251,6 @@ return {
 	--"github/copilot.vim",
 	{
 		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup()
-		end,
+		config = true,
 	},
 }

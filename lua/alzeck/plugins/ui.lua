@@ -39,38 +39,35 @@ return {
 	},
 	{
 		"laytan/cloak.nvim",
-		config = function()
-			require("cloak").setup({
-				enabled = true,
-				cloak_character = "*",
-				highlight_group = "Comment",
-				patterns = {
-					{
-						file_pattern = {
-							".env*",
-							"wrangler.toml",
-							".dev.vars",
-						},
-						cloak_pattern = "=.+",
+		opts = {
+			enabled = true,
+			cloak_character = "*",
+			highlight_group = "Comment",
+			patterns = {
+				{
+					file_pattern = {
+						".env*",
+						"wrangler.toml",
+						".dev.vars",
 					},
+					cloak_pattern = "=.+",
 				},
-			})
-			vim.keymap.set("n", "<leader>ct", "<cmd>:CloakToggle<cr>", { silent = true, noremap = true })
-		end,
+			},
+		},
+		-- TODO: improve lazy loading
+		lazy = false,
+		keys = {
+			{ "<leader>ct", "<cmd>:CloakToggle<cr>" },
+		},
 	},
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("trouble").setup({
-				icons = true,
-				-- your configuration comes here
-				-- or leave it empty to , the default settings
-				-- refer to the configuration section below
-			})
-
-			vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
-		end,
+		opts = {},
+		lazy = false,
+		keys = {
+			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>" },
+		},
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -132,32 +129,27 @@ return {
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({
-				filetypes = { "css", "typescript", "typescriptreact" },
-				user_default_options = {
-					css = true,
-					mode = "background",
-					tailwind = true,
-					virtualtext = "■",
-					always_update = true,
-				},
-			})
-		end,
+		opts = {
+			filetypes = { "css", "typescript", "typescriptreact" },
+			user_default_options = {
+				css = true,
+				mode = "background",
+				tailwind = true,
+				virtualtext = "■",
+				always_update = true,
+			},
+		},
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		opts = {},
-		config = function()
-			require("ibl").setup({
-				indent = { char = "▏" },
-				scope = {
-					enabled = true,
-					highlight = { "Function", "Label" },
-					show_exact_scope = true,
-				},
-			})
-		end,
+		opts = {
+			indent = { char = "▏" },
+			scope = {
+				enabled = true,
+				highlight = { "Function", "Label" },
+				show_exact_scope = true,
+			},
+		},
 	},
 }
