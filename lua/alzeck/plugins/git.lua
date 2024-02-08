@@ -10,10 +10,14 @@ return {
 			"ibhagwan/fzf-lua", -- optional
 		},
 		config = true,
-		keys = function()
-			local neogit = require("neogit")
-			return { { "<leader>gs", neogit.open } }
-		end,
+		keys = {
+			{
+				"<leader>gs",
+				function()
+					require("neogit").open({ kind = "replace" })
+				end,
+			},
+		},
 	},
 	{
 		"lewis6991/gitsigns.nvim",

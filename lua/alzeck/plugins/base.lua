@@ -251,6 +251,16 @@ return {
 				version = "2.*",
 				build = "make install_jsregexp",
 			},
+			{
+				"Dynge/gitmoji.nvim",
+				dependencies = {
+					"hrsh7th/nvim-cmp",
+				},
+				opts = {
+					filetypes = { "gitcommit", "NeogitCommitMessage" },
+				},
+				ft = { "gitcommit", "NeoGitCommitMessage" },
+			},
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
@@ -301,11 +311,11 @@ return {
 					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "luasnip" },
+					{ name = "gitmoji" },
 				},
 			})
 		end,
 	},
-
 	{
 		"numToStr/Comment.nvim",
 		config = true,
