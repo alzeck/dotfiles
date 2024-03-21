@@ -218,6 +218,9 @@ return {
 	-- Formatters
 	{
 		"nvimtools/none-ls.nvim",
+		dependencies = {
+			"nvimtools/none-ls-extras.nvim",
+		},
 		config = function()
 			local null_ls = require("null-ls")
 
@@ -226,7 +229,7 @@ return {
 					null_ls.builtins.formatting.prettier,
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.mix,
-					null_ls.builtins.formatting.autopep8,
+					require("none-ls.formatting.autopep8"),
 					null_ls.builtins.diagnostics.credo,
 				},
 			})
