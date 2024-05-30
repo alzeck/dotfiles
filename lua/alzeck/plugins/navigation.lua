@@ -30,7 +30,7 @@ return {
 		keys = function()
 			local harpoon = require("harpoon")
 			local append = function()
-				harpoon:list():append()
+				harpoon:list():add()
 			end
 			local toggle_quick_menu = function()
 				harpoon.ui:toggle_quick_menu(

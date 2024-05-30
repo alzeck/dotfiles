@@ -66,10 +66,9 @@ return {
 		opts = {},
 		lazy = false,
 		keys = {
-			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>" },
-			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>" },
-			{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>" },
-			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>" },
+			{ "<leader>xq", "<cmd>Trouble quickfix toggle<cr>" },
+			{ "<leader>xl", "<cmd>Trouble loclist toggle<cr>" },
+			{ "<leader>xd", "<cmd>Trouble diagnostics toggle<cr>" },
 		},
 	},
 	{

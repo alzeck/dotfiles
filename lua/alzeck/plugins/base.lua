@@ -152,7 +152,6 @@ return {
 					"rust_analyzer",
 					"tailwindcss",
 					"jsonls",
-					"eslint",
 					"pyright",
 					"elixirls",
 				},
@@ -230,6 +229,7 @@ return {
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.mix,
 					require("none-ls.formatting.autopep8"),
+					require("none-ls.diagnostics.eslint"),
 					null_ls.builtins.diagnostics.credo,
 				},
 			})
@@ -282,7 +282,7 @@ return {
 			cmp.setup({
 				formatting = lsp_zero.cmp_format(),
 				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = cmp_action.luasnip_supertab(),
+					["<C-y>"] = cmp_action.luasnip_supertab(),
 					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
@@ -308,12 +308,12 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "copilot" },
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lua" },
 					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "luasnip" },
+					{ name = "copilot" },
 					{ name = "gitmoji" },
 				},
 			})
