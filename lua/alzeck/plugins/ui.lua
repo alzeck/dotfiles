@@ -68,7 +68,8 @@ return {
 		keys = {
 			{ "<leader>xq", "<cmd>Trouble quickfix toggle<cr>" },
 			{ "<leader>xl", "<cmd>Trouble loclist toggle<cr>" },
-			{ "<leader>xd", "<cmd>Trouble diagnostics toggle<cr>" },
+			{ "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>" },
+			{ "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>" },
 		},
 	},
 	{

@@ -78,6 +78,21 @@ return {
 			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 		end,
 	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				-- Library items can be absolute paths
+				-- "~/projects/my-awesome-lib",
+				-- Or relative, which means they will be resolved as a plugin
+				"LazyVim",
+				-- When relative, you can also provide a path to the library in the plugin dir
+				"luvit-meta/library", -- see below
+			},
+		},
+	},
+	{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
 	-- LSP Support
 	{
@@ -85,9 +100,13 @@ return {
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "folke/neodev.nvim", opts = {} },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason-lspconfig.nvim" },
+			{
+				"mrcjkb/rustaceanvim",
+				version = "^4", -- Recommended
+				lazy = false, -- This plugin is already lazy
+			},
 		},
 		config = function()
 			local lsp_zero = require("lsp-zero")
@@ -146,6 +165,20 @@ return {
 				},
 			})
 
+			vim.g.rustaceanvim = {
+				server = {
+					capabilities = lsp_zero.get_capabilities(),
+					cmd = function()
+						local mason_registry = require("mason-registry")
+						local ra_binary = mason_registry.is_installed("rust-analyzer")
+								-- This may need to be tweaked, depending on the operating system.
+								and mason_registry.get_package("rust-analyzer"):get_install_path() .. "/rust-analyzer-aarch64-apple-darwin"
+							or "rust-analyzer"
+						return { ra_binary } -- You can add args to the list, such as '--log-file'
+					end,
+				},
+			}
+
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"tsserver",
@@ -154,9 +187,11 @@ return {
 					"jsonls",
 					"pyright",
 					"elixirls",
+					"astro",
 				},
 				handlers = {
 					lsp_zero.default_setup,
+					rust_analyzer = lsp_zero.noop,
 					lua_ls = function()
 						local lua_opts = lsp_zero.nvim_lua_ls()
 						require("lspconfig").lua_ls.setup(lua_opts)
@@ -165,7 +200,7 @@ return {
 						require("lspconfig").tailwindcss.setup({
 							settings = {
 								tailwindCSS = {
-									classAttributes = { "class", "className", "classNames" },
+									classAttributes = { "class", "className", "classNames", "class:list" },
 									experimental = {
 										classRegex = {
 											{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
@@ -279,12 +314,13 @@ return {
 			})
 			require("copilot_cmp").setup()
 			require("luasnip.loaders.from_vscode").lazy_load()
+			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 			cmp.setup({
-				formatting = lsp_zero.cmp_format(),
+				formatting = lsp_zero.cmp_format({}),
 				mapping = cmp.mapping.preset.insert({
-					["<C-y>"] = cmp_action.luasnip_supertab(),
-					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+					["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-f>"] = cmp_action.luasnip_jump_forward(),
@@ -307,15 +343,17 @@ return {
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-				sources = {
+				sources = cmp.config.sources({
+					{ name = "lazydev", group_index = 0 },
+					{ name = "copilot" },
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lua" },
+					{ name = "luasnip" },
+					{ name = "gitmoji" },
+				}, {
 					{ name = "buffer" },
 					{ name = "path" },
-					{ name = "luasnip" },
-					{ name = "copilot" },
-					{ name = "gitmoji" },
-				},
+				}),
 			})
 		end,
 	},
