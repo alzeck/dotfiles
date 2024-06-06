@@ -6,7 +6,7 @@ function ColorMyPencils(color)
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-function BuildTheme(mode)
+local function buildTheme(mode)
 	local main = {
 		base = "#00000000",
 		surface = "#00000000",
@@ -83,7 +83,7 @@ return {
 			require("lualine").setup({
 				options = {
 					-- @usage 'rose-pine' | 'rose-pine-alt'
-					theme = BuildTheme("dark"),
+					theme = buildTheme("dark"),
 				},
 				sections = {
 					lualine_b = { "branch", "diff" },
@@ -114,7 +114,7 @@ return {
 					local l = require("lualine")
 					l.setup({
 						options = {
-							theme = BuildTheme("dark"),
+							theme = buildTheme("dark"),
 						},
 					})
 					l.refresh()
@@ -125,7 +125,7 @@ return {
 					local l = require("lualine")
 					l.setup({
 						options = {
-							theme = BuildTheme("light"),
+							theme = buildTheme("light"),
 						},
 					})
 
