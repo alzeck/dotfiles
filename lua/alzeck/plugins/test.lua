@@ -20,7 +20,13 @@ return {
 					require("rustaceanvim.neotest"),
 				},
 			})
-			vim.keymap.set("n", "<leader>nt", neotest.run.run)
+			vim.keymap.set("n", "<leader>tc", neotest.run.run)
+			vim.keymap.set("n", "<leader>tf", function()
+				neotest.run.run(vim.fn.expand("%"))
+			end)
+			vim.keymap.set("n", "<leader>ta", function()
+				neotest.run.run(vim.fn.expand("."))
+			end)
 		end,
 	},
 }
