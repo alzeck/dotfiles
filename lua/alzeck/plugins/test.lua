@@ -27,6 +27,8 @@ return {
 			vim.keymap.set("n", "<leader>ta", function()
 				neotest.run.run(vim.fn.expand("."))
 			end)
+
+			vim.keymap.set("n", "<leader>ts", neotest.summary.toggle)
 		end,
 	},
 }
