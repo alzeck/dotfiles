@@ -4,7 +4,6 @@ return {
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
-			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"marilari88/neotest-vitest",
 			{
@@ -14,26 +13,14 @@ return {
 			},
 		},
 		config = function()
-			require("neotest").setup({
-				adapter = {
+			local neotest = require("neotest")
+			neotest.setup({
+				adapters = {
 					require("neotest-vitest"),
 					require("rustaceanvim.neotest"),
 				},
 			})
+			vim.keymap.set("n", "<leader>nt", neotest.run.run)
 		end,
-		keys = {
-			{
-				"<leader>nt",
-				function()
-					require("neotest").run.run()
-				end,
-			},
-			{
-				"<leader>tf",
-				function()
-					require("neotest").run.run(vim.fn.expand("%"))
-				end,
-			},
-		},
 	},
 }
