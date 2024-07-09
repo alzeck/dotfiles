@@ -264,7 +264,7 @@ return {
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.mix,
 					require("none-ls.formatting.autopep8"),
-					require("none-ls.diagnostics.eslint"),
+					-- require("none-ls.diagnostics.eslint"),
 					null_ls.builtins.diagnostics.credo,
 				},
 			})
