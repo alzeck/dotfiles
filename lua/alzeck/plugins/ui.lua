@@ -120,18 +120,6 @@ return {
 		},
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {
-			indent = { char = "▏" },
-			scope = {
-				enabled = true,
-				highlight = { "Function", "Label" },
-				show_exact_scope = true,
-			},
-		},
-	},
-	{
 		"stevearc/oil.nvim",
 		opts = {
 			default_file_explorer = false,

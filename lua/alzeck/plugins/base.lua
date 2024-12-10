@@ -107,6 +107,12 @@ return {
 				version = "^4", -- Recommended
 				lazy = false, -- This plugin is already lazy
 			},
+			{
+				"scalameta/nvim-metals",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+			},
 		},
 		config = function()
 			local lsp_zero = require("lsp-zero")
@@ -165,6 +171,24 @@ return {
 				},
 			})
 
+			---
+			-- Create the configuration for metals
+			---
+			local metals_config = require("metals").bare_config()
+			metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			---
+			-- Autocmd that will actually be in charging of starting metals
+			---
+			local metals_augroup = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				group = metals_augroup,
+				pattern = { "scala", "sbt", "java" },
+				callback = function()
+					require("metals").initialize_or_attach(metals_config)
+				end,
+			})
+
 			vim.g.rustaceanvim = {
 				server = {
 					capabilities = lsp_zero.get_capabilities(),
@@ -196,6 +220,18 @@ return {
 						local lua_opts = lsp_zero.nvim_lua_ls()
 						require("lspconfig").lua_ls.setup(lua_opts)
 					end,
+					-- elixirls = function()
+					-- 	require("lspconfig").elixirLS.setup({
+					-- 		cmd = vim.fn.stdpath("data") .. "/mason/bin/elixir-ls",
+					-- 		settings = {
+					-- 			elixirLS = {
+					-- 				dialyzerEnabled = true,
+					-- 				fetchDeps = true,
+					-- 				suggestSpecs = true,
+					-- 			},
+					-- 		},
+					-- 	})
+					-- end,
 					tailwindcss = function()
 						require("lspconfig").tailwindcss.setup({
 							settings = {
