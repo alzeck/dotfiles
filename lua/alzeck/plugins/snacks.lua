@@ -12,6 +12,7 @@ return {
 			enabled = true,
 			timeout = 3000,
 		},
+		scope = { enabled = true },
 		quickfile = { enabled = true },
 		scroll = { enabled = true },
 		statuscolumn = { enabled = true },

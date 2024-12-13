@@ -16,11 +16,16 @@ return {
 				function()
 					require("neogit").open({ kind = "replace" })
 				end,
+				desc = "Neogit",
 			},
 		},
 	},
 	{
 		"lewis6991/gitsigns.nvim",
+		event = "BufEnter",
+		dependencies = {
+			"folke/which-key.nvim",
+		},
 		config = function()
 			require("gitsigns").setup({
 				on_attach = function(bufnr)

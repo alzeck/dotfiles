@@ -6,16 +6,16 @@ return {
 		keys = function()
 			local builtin = require("telescope.builtin")
 			return {
-				{ "<leader>pf", builtin.find_files },
-				{ "<C-p>", builtin.git_files },
-				{ "<leader>ps", builtin.live_grep },
-				{ "<leader>vh", builtin.help_tags },
-				{ "<leader>gr", builtin.lsp_references },
-				{ "<leader>fb", builtin.buffers },
-				{ "<leader>of", builtin.oldfiles },
-				{ "<leader>fs", builtin.lsp_document_symbols },
-				{ "<leader>qf", builtin.quickfix },
-				{ "<leader>fib", builtin.current_buffer_fuzzy_find },
+				{ "<leader>pf", builtin.find_files, desc = "find files" },
+				{ "<C-p>", builtin.git_files, desc = "find git files" },
+				{ "<leader>ps", builtin.live_grep, desc = "grep" },
+				{ "<leader>vh", builtin.help_tags, desc = "search docs" },
+				{ "<leader>gr", builtin.lsp_references, desc = "lsp references" },
+				{ "<leader>fb", builtin.buffers, desc = "find open files" },
+				{ "<leader>of", builtin.oldfiles, desc = "find previous files" },
+				{ "<leader>fs", builtin.lsp_document_symbols, desc = "lsp symbols" },
+				{ "<leader>qf", builtin.quickfix, desc = "telescope quick fix" },
+				{ "<leader>fib", builtin.current_buffer_fuzzy_find, desc = "find in buffer" },
 			}
 		end,
 	},

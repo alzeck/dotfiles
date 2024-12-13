@@ -7,8 +7,11 @@ return {
 		keys = {
 			{
 				"<leader>ri",
-				[[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+				function()
+					require("refactoring").refactor("Inline Variable")
+				end,
 				mode = "v",
+				desc = "Refactor Inline Variable",
 				{ noremap = true, silent = true, expr = false },
 			},
 		},
@@ -205,7 +208,7 @@ return {
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"tsserver",
+					"ts_ls",
 					"rust_analyzer",
 					"tailwindcss",
 					"jsonls",
@@ -247,7 +250,7 @@ return {
 							},
 						})
 					end,
-					tsserver = function()
+					ts_ls = function()
 						local function organize_imports()
 							local params = {
 								command = "_typescript.organizeImports",
@@ -256,7 +259,7 @@ return {
 							vim.lsp.buf.execute_command(params)
 						end
 
-						require("lspconfig").tsserver.setup({
+						require("lspconfig").ts_ls.setup({
 							commands = {
 								OrganizeImports = {
 									organize_imports,
