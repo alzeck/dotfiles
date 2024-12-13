@@ -92,6 +92,7 @@ return {
 				"LazyVim",
 				-- When relative, you can also provide a path to the library in the plugin dir
 				"luvit-meta/library", -- see below
+				"snacks/meta/types",
 			},
 		},
 	},
@@ -398,7 +399,9 @@ return {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim",
-		config = true,
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
 }
