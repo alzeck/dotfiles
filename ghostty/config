@@ -1,0 +1,24 @@
+# style
+font-size = 15
+# font-feature=-liga
+# font-feature=-calt
+# font-feature=-dlig
+
+theme = rose-pine 
+background-opacity = 0.9
+background-blur-radius = 20
+
+title = "👻 Ghostty"
+macos-titlebar-style = hidden 
+macos-titlebar-proxy-icon = hidden
+
+# Tmux + Zsh
+shell-integration = zsh
+command = "/opt/homebrew/bin/tmux new -As0"
+initial-command = "/opt/homebrew/bin/tmux new -As0"
+
+# Remove tabs and windows keybindings
+keybind = cmd+t=unbind
+keybind = cmd+n=unbind
+keybind = cmd+d=unbind
+keybind = cmd+shift+d=unbind
