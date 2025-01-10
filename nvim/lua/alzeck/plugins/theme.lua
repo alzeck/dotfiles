@@ -74,6 +74,16 @@ return {
 			require("rose-pine").setup({
 				disable_background = true,
 				disable_float_background = true,
+				palette = {
+					main = {
+						base = "#1f1f1f",
+						surface = "#333333",
+						overlay = "#2e2e2e",
+
+						-- muted = "#787878",
+						-- subtle = "#908caa",
+					},
+				},
 			})
 
 			ColorMyPencils()
@@ -114,7 +124,7 @@ return {
 				update_interval = 1000,
 				set_dark_mode = function()
 					vim.api.nvim_set_option_value("background", "dark", {})
-					ColorMyPencils("rose-pine-moon")
+					ColorMyPencils("rose-pine")
 					local l = require("lualine")
 					l.setup({
 						options = {

@@ -6,7 +6,8 @@ font-size = 15
 
 theme = rose-pine 
 background-opacity = 0.9
-background-blur-radius = 20
+background = 0c0c0c
+background-blur-radius = 30
 
 title = "👻 Ghostty"
 macos-titlebar-style = hidden 

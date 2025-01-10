@@ -129,7 +129,7 @@ return {
 				info = "󰋽",
 			})
 
-			lsp_zero.on_attach(function(_client, bufnr)
+			lsp_zero.on_attach(function(client, bufnr)
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
 				lsp_zero.default_keymaps({ buffer = bufnr })
@@ -208,7 +208,6 @@ return {
 			}
 
 			require("mason-lspconfig").setup({
-				automatic_installation = false,
 				ensure_installed = {
 					"ts_ls",
 					"rust_analyzer",
