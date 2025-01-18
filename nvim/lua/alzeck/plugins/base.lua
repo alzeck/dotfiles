@@ -208,12 +208,13 @@ return {
 			}
 
 			require("mason-lspconfig").setup({
+				automatic_installation = false,
 				ensure_installed = {
 					"ts_ls",
 					"rust_analyzer",
 					"tailwindcss",
 					"jsonls",
-					"pyright",
+					"basedpyright",
 					"elixirls",
 					"astro",
 				},
@@ -259,12 +260,47 @@ return {
 							}
 							vim.lsp.buf.execute_command(params)
 						end
+						local inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						}
 
 						require("lspconfig").ts_ls.setup({
+							settings = {
+								typescript = {
+									inlayHints = inlayHints,
+								},
+								javascript = {
+									inlayHints = inlayHints,
+								},
+							},
 							commands = {
 								OrganizeImports = {
 									organize_imports,
 									description = "Organize Imports",
+								},
+							},
+						})
+					end,
+					gopls = function()
+						require("lspconfig").gopls.setup({
+							settings = {
+								gopls = {
+									hints = {
+										rangeVariableTypes = true,
+										parameterNames = true,
+										constantValues = true,
+										assignVariableTypes = true,
+										compositeLiteralFields = true,
+										compositeLiteralTypes = true,
+										functionTypeParameters = true,
+									},
 								},
 							},
 						})
