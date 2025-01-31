@@ -27,7 +27,6 @@ return {
 			},
 		},
 	},
-
 	{
 		"neovim/nvim-lspconfig",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
@@ -37,6 +36,10 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			vim.lsp.handlers["textDocument/signatureHelp"] =
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
 			local lspconfig_defaults = require("lspconfig").util.default_config
 			lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 				"force",
@@ -63,6 +66,10 @@ return {
 			})
 
 			vim.diagnostic.config({
+				virtual_text = true,
+				underline = true,
+				update_in_insert = false,
+				severity_sort = false,
 				signs = {
 					text = {
 						[vim.diagnostic.severity.ERROR] = "✘",

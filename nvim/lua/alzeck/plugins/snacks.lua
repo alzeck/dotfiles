@@ -25,6 +25,13 @@ return {
 	},
 	keys = {
 		{
+			"<leader><tab>",
+			function()
+				Snacks.picker.explorer()
+			end,
+			desc = "File explorer",
+		},
+		{
 			"<leader>z",
 			function()
 				Snacks.zen()
