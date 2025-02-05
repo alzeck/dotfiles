@@ -36,9 +36,7 @@ local function buildTheme(mode)
 	}
 	local p = main
 
-	if mode == "light" then
-		p = dawn
-	end
+	if mode == "light" then p = dawn end
 
 	return {
 		normal = {
