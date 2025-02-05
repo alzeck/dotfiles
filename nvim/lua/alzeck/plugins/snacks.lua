@@ -41,20 +41,20 @@ return {
     { "<leader>fs", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     -- Diagnostics
-    { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-    { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
-    { "<leader>sl", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+    { "<leader>qd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>qD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
+    { "<leader>ql", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
     -- Search
-    { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
-    { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "<leader>/i", function() Snacks.picker.icons() end, desc = "Icons" },
+    { "<leader>/k", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-    { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+    { "<leader>fy", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    { "<leader>fS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 
     { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },

@@ -1,6 +1,7 @@
 return {
   {
     "laytan/cloak.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       enabled = true,
       cloak_character = "*",
@@ -16,8 +17,6 @@ return {
         },
       },
     },
-    -- TODO: improve lazy loading
-    lazy = false,
     keys = {
       { "<leader>ct", "<cmd>:CloakToggle<cr>" },
     },
@@ -25,8 +24,8 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Trouble",
     opts = {},
-    lazy = false,
     keys = {
       { "<leader>xq", "<cmd>Trouble quickfix toggle<cr>" },
       { "<leader>xl", "<cmd>Trouble loclist toggle<cr>" },
@@ -38,7 +37,7 @@ return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
-    lazy = false,
+    cmd = { "TodoTrouble" },
     keys = {
       { "<leader>tt", function() Snacks.picker.todo_comments() end, desc = "Todo" },
       { "<leader>tq", "<cmd>TodoTrouble<cr>" },
@@ -46,6 +45,8 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    event = { "VeryLazy" },
+    lazy = vim.fn.argc(-1) == 0,
     build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context",

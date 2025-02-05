@@ -37,11 +37,18 @@ return {
     config = function()
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
       vim.lsp.handlers["textDocument/signatureHelp"] =
-          vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-
+        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
       local lspconfig_defaults = require("lspconfig").util.default_config
-      lspconfig_defaults.capabilities =
-          vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local lsp_capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), {
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+          },
+        },
+      })
+
+      lspconfig_defaults.capabilities = vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, lsp_capabilities)
 
       vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP actions",
@@ -75,6 +82,19 @@ return {
 
       local noop = function() end
 
+      vim.g.rustaceanvim = {
+        server = {
+          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          cmd = function()
+            local mason_registry = require("mason-registry")
+            local ra_binary = mason_registry.is_installed("rust-analyzer")
+                -- This may need to be tweaked, depending on the operating system.
+                and mason_registry.get_package("rust-analyzer"):get_install_path() .. "/rust-analyzer-aarch64-apple-darwin"
+              or "rust-analyzer"
+            return { ra_binary } -- You can add args to the list, such as '--log-file'
+          end,
+        },
+      }
       require("mason-lspconfig").setup({
         automatic_installation = false,
         ensure_installed = {
@@ -97,7 +117,7 @@ return {
                   experimental = {
                     classRegex = {
                       { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-                      { "cn\\(([^)]*)\\)",  "[\"'`]([^\"'`]*).*?[\"'`]" },
+                      { "cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
                     },
                   },
                 },
@@ -163,24 +183,8 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
-    lazy = false,   -- This plugin is already lazy
-    config = function()
-      vim.g.rustaceanvim = {
-        server = {
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          cmd = function()
-            local mason_registry = require("mason-registry")
-            local ra_binary = mason_registry.is_installed("rust-analyzer")
-                -- This may need to be tweaked, depending on the operating system.
-                and mason_registry.get_package("rust-analyzer"):get_install_path() ..
-                "/rust-analyzer-aarch64-apple-darwin"
-                or "rust-analyzer"
-            return { ra_binary } -- You can add args to the list, such as '--log-file'
-          end,
-        },
-      }
-    end,
+    version = "^5", -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
   {
     "elixir-tools/elixir-tools.nvim",
@@ -215,6 +219,8 @@ return {
   },
   {
     "scalameta/nvim-metals",
+    event = { "BufReadPre", "BufNewFile" },
+    ft = { "scala", "sbt", "java" },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
