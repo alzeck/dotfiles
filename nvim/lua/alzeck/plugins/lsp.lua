@@ -80,38 +80,6 @@ return {
 				},
 			})
 
-			-- format on save
-			local buffer_autoformat = function(bufnr)
-				local group = "lsp_autoformat"
-				vim.api.nvim_create_augroup(group, { clear = false })
-				vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					buffer = bufnr,
-					group = group,
-					desc = "LSP format on save",
-					callback = function()
-						-- note: do not enable async formatting
-						vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-					end,
-				})
-			end
-
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(event)
-					local id = vim.tbl_get(event, "data", "client_id")
-					local client = id and vim.lsp.get_client_by_id(id)
-					if client == nil then
-						return
-					end
-
-					-- make sure there is at least one client with formatting capabilities
-					if client.supports_method("textDocument/formatting") then
-						buffer_autoformat(event.buf)
-					end
-				end,
-			})
-
 			local noop = function() end
 
 			require("mason-lspconfig").setup({
@@ -122,13 +90,13 @@ return {
 					"tailwindcss",
 					"jsonls",
 					"basedpyright",
-					"elixirls",
 					"astro",
 				},
 				handlers = {
 					function(server_name)
 						require("lspconfig")[server_name].setup({})
 					end,
+					elixirls = noop,
 					rust_analyzer = noop,
 					tailwindcss = function()
 						require("lspconfig").tailwindcss.setup({
@@ -221,6 +189,37 @@ return {
 				},
 			}
 		end,
+	},
+	{
+		"elixir-tools/elixir-tools.nvim",
+		version = "*",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local elixir = require("elixir")
+			local elixirls = require("elixir.elixirls")
+
+			elixir.setup({
+				nextls = { enable = true },
+				elixirls = {
+					enable = true,
+					settings = elixirls.settings({
+						dialyzerEnabled = false,
+						enableTestLenses = false,
+					}),
+					on_attach = function(client, bufnr)
+						vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+						vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+						vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+					end,
+				},
+				projectionist = {
+					enable = true,
+				},
+			})
+		end,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
 	},
 	{
 		"scalameta/nvim-metals",
