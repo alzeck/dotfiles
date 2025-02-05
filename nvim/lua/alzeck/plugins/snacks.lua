@@ -20,6 +20,7 @@ return {
 		styles = {
 			notification = {
 				wo = { wrap = true }, -- Wrap notifications
+				relative = "editor",
 			},
 		},
 	},

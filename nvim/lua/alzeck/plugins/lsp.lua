@@ -4,9 +4,9 @@ return {
 		ft = "lua",
 		opts = {
 			library = {
-				"LazyVim",
-				"luvit-meta/library",
-				"snacks/meta/types",
+				"lazy.nvim",
+				"snacks.nvim",
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
 	},

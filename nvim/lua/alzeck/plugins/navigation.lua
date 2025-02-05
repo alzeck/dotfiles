@@ -99,12 +99,4 @@ return {
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
-	{
-		"stevearc/oil.nvim",
-		opts = {
-			default_file_explorer = false,
-		},
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-		keys = { { "<leader>o", "<cmd>Oil<cr>" } },
-	},
 }
