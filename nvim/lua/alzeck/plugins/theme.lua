@@ -68,24 +68,21 @@ return {
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    config = function()
-      require("rose-pine").setup({
-        disable_background = true,
-        disable_float_background = true,
-        palette = {
-          main = {
-            base = "#1f1f1f",
-            surface = "#333333",
-            overlay = "#2e2e2e",
+    lazy = true,
+    opts = {
+      disable_background = true,
+      disable_float_background = true,
+      palette = {
+        main = {
+          base = "#1f1f1f",
+          surface = "#333333",
+          overlay = "#2e2e2e",
 
-            -- muted = "#787878",
-            -- subtle = "#908caa",
-          },
+          -- muted = "#787878",
+          -- subtle = "#908caa",
         },
-      })
-
-      ColorMyPencils()
-    end,
+      },
+    },
   },
   {
     "nvim-lualine/lualine.nvim",
