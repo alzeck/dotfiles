@@ -28,8 +28,10 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    cmd = { "LspInfo", "LspInstall", "LspStart" },
-    event = { "BufReadPre", "BufNewFile" },
+    priority = 1000,
+    lazy = false,
+    -- cmd = { "LspInfo", "LspInstall", "LspStart" },
+    -- event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "hrsh7th/cmp-nvim-lsp" },
       { "williamboman/mason-lspconfig.nvim" },
@@ -38,6 +40,7 @@ return {
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
       vim.lsp.handlers["textDocument/signatureHelp"] =
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
       local lspconfig_defaults = require("lspconfig").util.default_config
       local lsp_capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), {
         textDocument = {
@@ -217,28 +220,28 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  {
-    "scalameta/nvim-metals",
-    event = { "BufReadPre", "BufNewFile" },
-    ft = { "scala", "sbt", "java" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      -- Create the configuration for metals
-      ---
-      local metals_config = require("metals").bare_config()
-      metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      ---
-      -- Autocmd that will actually be in charging of starting metals
-      ---
-      local metals_augroup = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        group = metals_augroup,
-        pattern = { "scala", "sbt", "java" },
-        callback = function() require("metals").initialize_or_attach(metals_config) end,
-      })
-    end,
-  },
+  -- {
+  --   "scalameta/nvim-metals",
+  --   -- event = { "BufReadPre", "BufNewFile" },
+  --   -- ft = { "scala", "sbt", "java" },
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --     -- Create the configuration for metals
+  --     ---
+  --     local metals_config = require("metals").bare_config()
+  --     metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+  --
+  --     ---
+  --     -- Autocmd that will actually be in charging of starting metals
+  --     ---
+  --     local metals_augroup = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+  --     vim.api.nvim_create_autocmd("FileType", {
+  --       group = metals_augroup,
+  --       pattern = { "scala", "sbt", "java" },
+  --       callback = function() require("metals").initialize_or_attach(metals_config) end,
+  --     })
+  --   end,
+  -- },
 }

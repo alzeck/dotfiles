@@ -4,13 +4,13 @@ font-size = 15
 # font-feature=-calt
 # font-feature=-dlig
 
-theme = rose-pine 
-background-opacity = 0.7
+theme = rose-pine
+background-opacity = 0.6
 background = 0c0c0c
 background-blur-radius = 20
 
 title = "👻 Ghostty"
-macos-titlebar-style = hidden 
+macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 
 # Tmux + Zsh

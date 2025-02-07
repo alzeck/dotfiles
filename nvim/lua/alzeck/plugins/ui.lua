@@ -23,6 +23,7 @@ return {
   },
   {
     "folke/trouble.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = "Trouble",
     opts = {},
@@ -38,6 +39,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
     cmd = { "TodoTrouble" },
+    event = { "BufReadPre", "BufNewFile" },
     keys = {
       { "<leader>tt", function() Snacks.picker.todo_comments() end, desc = "Todo" },
       { "<leader>tq", "<cmd>TodoTrouble<cr>" },
