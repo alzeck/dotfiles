@@ -1,15 +1,15 @@
 # style
-font-size = 15
+font-size = 16
 # font-feature=-liga
 # font-feature=-calt
 # font-feature=-dlig
 
 theme = rose-pine
-background-opacity = 0.6
+background-opacity = 0.7
 background = 0c0c0c
-background-blur-radius = 20
+background-blur-radius = 255
 
-title = "👻 Ghostty"
+title = "Ghostty"
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 
