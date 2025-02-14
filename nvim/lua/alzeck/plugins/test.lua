@@ -21,11 +21,12 @@ return {
           require("rustaceanvim.neotest"),
         },
       })
-      vim.keymap.set("n", "<leader>tc", neotest.run.run)
-      vim.keymap.set("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end)
-      vim.keymap.set("n", "<leader>ta", function() neotest.run.run(vim.fn.expand(".")) end)
-
-      vim.keymap.set("n", "<leader>ts", neotest.summary.toggle)
     end,
+    keymap = {
+      { "n", "<leader>tc", function() require("neotest").run.run() end, desc = "Run all files" },
+      { "n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run current file" },
+      { "n", "<leader>ta", function() require("neotest").run.run(vim.fn.expand(".")) end, desc = "Run current test" },
+      { "n", "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle summary" },
+    },
   },
 }

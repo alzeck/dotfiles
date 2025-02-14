@@ -28,6 +28,7 @@ return {
         relative = "editor",
       },
     },
+    image = {},
   },
   keys = {
     -- Explorer
@@ -40,6 +41,7 @@ return {
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>fs", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>fr", function() Snacks.picker.resume() end, desc = "Resume finder" },
     -- Diagnostics
     { "<leader>qd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>qD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },

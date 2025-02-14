@@ -28,10 +28,8 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    priority = 1000,
-    lazy = false,
-    -- cmd = { "LspInfo", "LspInstall", "LspStart" },
-    -- event = { "BufReadPre", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspStart" },
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "hrsh7th/cmp-nvim-lsp" },
       { "williamboman/mason-lspconfig.nvim" },
