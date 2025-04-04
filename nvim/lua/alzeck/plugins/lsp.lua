@@ -31,7 +31,6 @@ return {
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
       { "williamboman/mason-lspconfig.nvim" },
     },
     config = function()
@@ -40,14 +39,19 @@ return {
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
       local lspconfig_defaults = require("lspconfig").util.default_config
-      local lsp_capabilities = vim.tbl_deep_extend("force", require("cmp_nvim_lsp").default_capabilities(), {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
+      local lsp_capabilities = vim.tbl_deep_extend(
+        "force",
+        require("blink.cmp").get_lsp_capabilities({}, false),
+        -- require("cmp_nvim_lsp").default_capabilities(),
+        {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
           },
-        },
-      })
+        }
+      )
 
       lspconfig_defaults.capabilities = vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, lsp_capabilities)
 
@@ -67,7 +71,7 @@ return {
       })
 
       vim.diagnostic.config({
-        -- virtual_text = true,
+        virtual_text = true,
         underline = true,
         update_in_insert = false,
         severity_sort = false,
@@ -86,7 +90,8 @@ return {
 
       vim.g.rustaceanvim = {
         server = {
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          capabilities = require("blink.cmp").get_lsp_capabilities(),
+          -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
           cmd = function()
             local mason_registry = require("mason-registry")
             local ra_binary = mason_registry.is_installed("rust-analyzer")
