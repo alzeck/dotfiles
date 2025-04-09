@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-export FZF_DEFAULT_OPTS="
-	--color=fg:#908caa,hl:#ebbcba
-	--color=fg+:#e0def4,hl+:#ebbcba
-	--color=border:#403d52,header:#31748f,gutter:#191724
-	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
-	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
+--color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+--color=marker:#7287fd,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39 \
+--color=border:#ccd0da,label:#4c4f69"
 
 if [[ $# -eq 1 ]]; then
     selected=$1
