@@ -76,27 +76,25 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "ColorScheme",
-    config = function()
-      require("lualine").setup({
-        options = {
-          -- @usage 'rose-pine' | 'rose-pine-alt'
-          theme = buildTheme("dark"),
-        },
-        sections = {
-          lualine_b = { "branch", "diff" },
-          lualine_c = {
-            {
-              "filename",
-              path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-            },
-            "diagnostics",
+    opts = {
+      options = {
+        -- @usage 'rose-pine' | 'rose-pine-alt'
+        theme = buildTheme("dark"),
+      },
+      sections = {
+        lualine_b = { "branch", "diff" },
+        lualine_c = {
+          {
+            "filename",
+            path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
           },
-
-          lualine_x = { "filetype" },
-          lualine_y = {},
+          "diagnostics",
         },
-      })
-    end,
+
+        lualine_x = { "filetype" },
+        lualine_y = {},
+      },
+    },
   },
   -- {
   --   "f-person/auto-dark-mode.nvim",

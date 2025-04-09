@@ -6,6 +6,9 @@ return {
       library = {
         "lazy.nvim",
         "snacks.nvim",
+        "todo-comments.nvim",
+        "nvim-treesitter",
+        "nvim-treesitter-context",
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
@@ -34,24 +37,15 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
     },
     config = function()
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-      vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-
       local lspconfig_defaults = require("lspconfig").util.default_config
-      local lsp_capabilities = vim.tbl_deep_extend(
-        "force",
-        require("blink.cmp").get_lsp_capabilities({}, false),
-        -- require("cmp_nvim_lsp").default_capabilities(),
-        {
-          textDocument = {
-            foldingRange = {
-              dynamicRegistration = false,
-              lineFoldingOnly = true,
-            },
+      local lsp_capabilities = vim.tbl_deep_extend("force", require("blink.cmp").get_lsp_capabilities({}, false), {
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
           },
-        }
-      )
+        },
+      })
 
       lspconfig_defaults.capabilities = vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, lsp_capabilities)
 
@@ -60,12 +54,7 @@ return {
         callback = function(event)
           local opts = { buffer = event.buf }
 
-          vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-          vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-          vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-          vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
           vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-          vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
           vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
         end,
       })
@@ -137,7 +126,7 @@ return {
                 command = "_typescript.organizeImports",
                 arguments = { vim.api.nvim_buf_get_name(0) },
               }
-              vim.lsp.buf.execute_command(params)
+              -- vim.lsp.buf.execute_command(params)
             end
             local inlayHints = {
               includeInlayParameterNameHints = "all",

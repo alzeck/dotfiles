@@ -19,7 +19,6 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = { preset = "default" },
-
       appearance = {
         nerd_font_variant = "mono",
         -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
