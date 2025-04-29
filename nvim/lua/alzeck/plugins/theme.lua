@@ -22,7 +22,7 @@ return {
     opts = {
       options = {
         -- @usage 'rose-pine' | 'rose-pine-alt'
-        theme = "catpuccin",
+        theme = "catppuccin",
       },
       sections = {
         lualine_b = { "branch", "diff" },
