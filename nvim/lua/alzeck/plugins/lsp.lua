@@ -15,9 +15,11 @@ return {
   },
   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     lazy = false,
     build = ":MasonUpdate",
+    ---@module 'mason'
+    ---@type MasonSettings
     opts = {
       ui = {
         border = "rounded",
@@ -34,7 +36,7 @@ return {
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "williamboman/mason-lspconfig.nvim" },
+      { "mason-org/mason-lspconfig.nvim" },
     },
     config = function()
       local lspconfig_defaults = require("lspconfig").util.default_config
@@ -80,18 +82,17 @@ return {
       vim.g.rustaceanvim = {
         server = {
           capabilities = require("blink.cmp").get_lsp_capabilities(),
-          -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
           cmd = function()
             local mason_registry = require("mason-registry")
-            local ra_binary = mason_registry.is_installed("rust-analyzer")
-                -- This may need to be tweaked, depending on the operating system.
-                and mason_registry.get_package("rust-analyzer"):get_install_path() .. "/rust-analyzer-aarch64-apple-darwin"
+            local ra_binary = mason_registry.is_installed("rust-analyzer") and vim.fn.exepath("rust-analyzer")
               or "rust-analyzer"
             return { ra_binary } -- You can add args to the list, such as '--log-file'
           end,
         },
       }
+
       require("mason-lspconfig").setup({
+        automatic_enable = true,
         automatic_installation = false,
         ensure_installed = {
           "ts_ls",
@@ -103,7 +104,6 @@ return {
         },
         handlers = {
           function(server_name) require("lspconfig")[server_name].setup({}) end,
-          elixirls = noop,
           rust_analyzer = noop,
           tailwindcss = function()
             require("lspconfig").tailwindcss.setup({
@@ -121,13 +121,6 @@ return {
             })
           end,
           ts_ls = function()
-            local function organize_imports()
-              local params = {
-                command = "_typescript.organizeImports",
-                arguments = { vim.api.nvim_buf_get_name(0) },
-              }
-              -- vim.lsp.buf.execute_command(params)
-            end
             local inlayHints = {
               includeInlayParameterNameHints = "all",
               includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -146,12 +139,6 @@ return {
                 },
                 javascript = {
                   inlayHints = inlayHints,
-                },
-              },
-              commands = {
-                OrganizeImports = {
-                  organize_imports,
-                  description = "Organize Imports",
                 },
               },
             })
@@ -179,62 +166,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^5", -- Recommended
+    version = "^6", -- Recommended
     lazy = false, -- This plugin is already lazy
   },
-  {
-    "elixir-tools/elixir-tools.nvim",
-    version = "*",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local elixir = require("elixir")
-      local elixirls = require("elixir.elixirls")
-
-      elixir.setup({
-        nextls = { enable = true },
-        elixirls = {
-          enable = true,
-          settings = elixirls.settings({
-            dialyzerEnabled = false,
-            enableTestLenses = false,
-          }),
-          on_attach = function(client, bufnr)
-            vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-          end,
-        },
-        projectionist = {
-          enable = true,
-        },
-      })
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
-  -- {
-  --   "scalameta/nvim-metals",
-  --   -- event = { "BufReadPre", "BufNewFile" },
-  --   -- ft = { "scala", "sbt", "java" },
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   config = function()
-  --     -- Create the configuration for metals
-  --     ---
-  --     local metals_config = require("metals").bare_config()
-  --     metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-  --
-  --     ---
-  --     -- Autocmd that will actually be in charging of starting metals
-  --     ---
-  --     local metals_augroup = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-  --     vim.api.nvim_create_autocmd("FileType", {
-  --       group = metals_augroup,
-  --       pattern = { "scala", "sbt", "java" },
-  --       callback = function() require("metals").initialize_or_attach(metals_config) end,
-  --     })
-  --   end,
-  -- },
 }

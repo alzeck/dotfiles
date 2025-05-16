@@ -8,7 +8,7 @@ return {
   },
   {
     "mbbill/undotree",
-    keys = { { "<leader>u", ":UndotreeToggle <CR>" } },
+    keys = { { "<leader>tu", ":UndotreeToggle <CR>" } },
   },
   {
     "folke/ts-comments.nvim",
