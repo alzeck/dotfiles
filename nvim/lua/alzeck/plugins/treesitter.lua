@@ -1,5 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  event = { "VeryLazy" },
+  lazy = vim.fn.argc(-1) == 0,
   build = ":TSUpdate",
   dependencies = {
     {

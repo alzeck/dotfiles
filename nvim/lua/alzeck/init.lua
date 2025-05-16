@@ -1,6 +1,7 @@
 require("alzeck.remap")
 require("alzeck.lazy")
 require("alzeck.set")
+require("alzeck.lsp")
 
 function ColorMyPencils(color)
   vim.cmd.colorscheme(color)
