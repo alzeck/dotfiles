@@ -38,3 +38,9 @@ vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldtext = ""
 vim.opt.foldcolumn = "0"
 vim.opt.fillchars:append({ fold = " " })
+
+-- Undercurl
+vim.cmd([[let &t_Cs = "\e[4:3m"]])
+vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+vim.opt.spelllang = { "en" }
