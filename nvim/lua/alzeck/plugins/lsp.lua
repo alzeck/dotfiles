@@ -15,27 +15,26 @@ return {
   },
   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
   {
-    "mason-org/mason.nvim",
-    lazy = false,
-    build = ":MasonUpdate",
-    ---@module 'mason'
-    ---@type MasonSettings
-    opts = {
-      ui = {
-        border = "rounded",
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
-      },
-    },
-  },
-  {
     "mason-org/mason-lspconfig.nvim",
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      {
+        "mason-org/mason.nvim",
+        build = ":MasonUpdate",
+        ---@module 'mason'
+        ---@type MasonSettings
+        opts = {
+          ui = {
+            border = "rounded",
+            icons = {
+              package_installed = "✓",
+              package_pending = "➜",
+              package_uninstalled = "✗",
+            },
+          },
+        },
+      },
 
       "neovim/nvim-lspconfig",
     },
@@ -46,6 +45,8 @@ return {
       automatic_installation = false,
       ensure_installed = {
         "ts_ls",
+        "eslint",
+        "lua_ls",
         "rust_analyzer",
         "tailwindcss",
         "jsonls",
