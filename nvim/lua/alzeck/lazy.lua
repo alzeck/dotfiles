@@ -19,7 +19,7 @@ require("lazy").setup({
     import = "alzeck.plugins",
   },
   install = {
-    colorscheme = { "rose-pine" },
+    colorscheme = { "catpuccin-moccha" },
   },
   ui = {
     border = "rounded",

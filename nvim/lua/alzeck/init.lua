@@ -14,7 +14,7 @@ function ColorMyPencils(color)
   })
 end
 
-ColorMyPencils("catppuccin-latte")
+ColorMyPencils("catppuccin-mocha")
 
 vim.filetype.add({
   extension = {

@@ -4,17 +4,18 @@ font-size = 16
 # font-feature=-calt
 # font-feature=-dlig
 
-theme = catppuccin-latte
-# theme = rose-pine
-background-opacity = 0.8
+# theme = catppuccin-latte
+theme = catppuccin-mocha
+background-opacity = 0.6
 # background = 0c0c0c
+background = 000000
 background-blur-radius = 255
 
 title = "Ghostty"
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 
-# Tmux + Zsh
+# tmux + zsh 
 shell-integration = zsh
 command = "/opt/homebrew/bin/tmux new -As0"
 initial-command = "/opt/homebrew/bin/tmux new -As0"
