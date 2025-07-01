@@ -1,19 +1,19 @@
 return {
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
-    },
-    config = true,
-    keys = {
-      {
-        "<leader>gs",
-        function() require("neogit").open({ kind = "replace" }) end,
-        desc = "Neogit",
-      },
-    },
-  },
+  -- {
+  --   "NeogitOrg/neogit",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim", -- required
+  --     "sindrets/diffview.nvim", -- optional - Diff integration
+  --   },
+  --   config = true,
+  --   keys = {
+  --     {
+  --       "<leader>gs",
+  --       function() require("neogit").open({ kind = "replace" }) end,
+  --       desc = "Neogit",
+  --     },
+  --   },
+  -- },
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
