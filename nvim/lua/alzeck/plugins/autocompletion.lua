@@ -1,5 +1,20 @@
 return {
   {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    ---@module 'CopilotChat'
+    ---@type CopilotChat.config
+    opts = {
+      model = "claude-sonnet-4",
+    },
+    keys = {
+      { "<leader>cc", "<cmd>CopilotChatToggle<cr>", desc = "Copilot Chat" },
+    },
+  },
+  {
     "saghen/blink.cmp",
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },

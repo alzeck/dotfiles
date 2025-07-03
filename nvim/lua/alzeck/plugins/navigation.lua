@@ -44,11 +44,11 @@ return {
       "TmuxNavigatePrevious",
     },
     keys = {
-      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+      { "<c-h>", function() vim.cmd("<C-U>TmuxNavigateLeft<cr>") end },
+      { "<c-j>", function() vim.cmd("<C-U>TmuxNavigateDown<cr>") end },
+      { "<c-k>", function() vim.cmd("<C-U>TmuxNavigateUp<cr>") end },
+      { "<c-l>", function() vim.cmd("<C-U>TmuxNavigateRight<cr>") end },
+      { "<c-\\>", function() vim.cmd("<C-U>TmuxNavigatePrevious<cr>") end },
     },
   },
 }
