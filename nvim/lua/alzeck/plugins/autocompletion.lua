@@ -1,3 +1,19 @@
+local autocmd = vim.api.nvim_create_autocmd
+local ui_helpers = vim.api.nvim_create_augroup("UiHelpers", { clear = true })
+
+-- disable buggy anims in completion windows
+autocmd("User", {
+  group = ui_helpers,
+  pattern = "BlinkCmpMenuOpen",
+  callback = function() vim.g.snacks_animate = false end,
+})
+
+autocmd("User", {
+  group = ui_helpers,
+  pattern = "BlinkCmpMenuClose",
+  callback = function() vim.g.snacks_animate = true end,
+})
+
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
