@@ -54,7 +54,7 @@ refresher:
   refreshInterval: 10
   fetchInterval: 60
 confirmOnQuit: false
-quitOnTopLevelReturn: false
+quitOnTopLevelReturn: true
 os:
   editPreset: "nvim-remote"
 disableStartupPopups: false
@@ -67,4 +67,7 @@ customCommands:
     context: "commits"
 services: {}
 notARepository: skip
-promptToReturnFromSubprocess: true
+promptToReturnFromSubprocess: false
+keybinding:
+  universal:
+    executeShellCommand: "$"
