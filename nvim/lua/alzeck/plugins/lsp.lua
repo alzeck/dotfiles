@@ -45,7 +45,7 @@ return {
       automatic_installation = false,
       ensure_installed = {
         "ts_ls",
-        "eslint",
+        "oxlint",
         "lua_ls",
         "rust_analyzer",
         "tailwindcss",

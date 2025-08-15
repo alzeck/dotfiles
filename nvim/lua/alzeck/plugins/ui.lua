@@ -3,7 +3,7 @@ return {
     "laytan/cloak.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      enabled = true,
+      enabled = false,
       cloak_character = "*",
       highlight_group = "Comment",
       patterns = {
