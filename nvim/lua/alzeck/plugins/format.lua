@@ -1,4 +1,5 @@
 local supported = {
+  "astro",
   "css",
   "graphql",
   "handlebars",

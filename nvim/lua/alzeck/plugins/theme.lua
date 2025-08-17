@@ -7,6 +7,10 @@ return {
     ---@type CatppuccinOptions
     opts = {
       transparent_background = true,
+      float = {
+        solid = false,
+        transparent = true,
+      },
       integrations = {
         blink_cmp = true,
         harpoon = true,

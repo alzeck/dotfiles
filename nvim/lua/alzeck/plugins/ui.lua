@@ -100,5 +100,14 @@ return {
     keys = {
       { "<leader>o", "<cmd>Oil<cr>", desc = "Open in Oil" },
     },
+    {
+      "MagicDuck/grug-far.nvim",
+      ---@module 'grug-far'
+      ---@type grug.far.OptionsOverride
+      opts = {},
+      keys = {
+        { "<leader>sr", "<cmd>GrugFar<cr>", desc = "Search in files" },
+      },
+    },
   },
 }

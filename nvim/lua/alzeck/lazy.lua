@@ -19,7 +19,7 @@ require("lazy").setup({
     import = "alzeck.plugins",
   },
   install = {
-    colorscheme = { "catpuccin-moccha" },
+    colorscheme = { "catppuccin-moccha" },
   },
   ui = {
     border = "rounded",

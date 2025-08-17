@@ -25,7 +25,7 @@ vim.diagnostic.config({
 
 local inlayHints = {
   includeInlayParameterNameHints = "all",
-  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
   includeInlayFunctionParameterTypeHints = true,
   includeInlayVariableTypeHints = true,
   includeInlayVariableTypeHintsWhenTypeMatchesName = true,
