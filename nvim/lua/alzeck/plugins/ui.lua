@@ -1,27 +1,5 @@
 return {
   {
-    "laytan/cloak.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      enabled = false,
-      cloak_character = "*",
-      highlight_group = "Comment",
-      patterns = {
-        {
-          file_pattern = {
-            ".env*",
-            "wrangler.toml",
-            ".dev.vars",
-          },
-          cloak_pattern = "=.+",
-        },
-      },
-    },
-    keys = {
-      { "<leader>ct", "<cmd>:CloakToggle<cr>" },
-    },
-  },
-  {
     "folke/trouble.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
