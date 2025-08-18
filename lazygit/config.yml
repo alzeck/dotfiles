@@ -56,7 +56,7 @@ refresher:
 confirmOnQuit: false
 quitOnTopLevelReturn: true
 os:
-  editPreset: "nvim-remote"
+  editPreset: "nvim"
 disableStartupPopups: false
 customCommands:
   - key: "b"
