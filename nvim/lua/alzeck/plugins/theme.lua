@@ -25,8 +25,8 @@ return {
     event = "ColorScheme",
     opts = {
       options = {
-        -- @usage 'rose-pine' | 'rose-pine-alt'
         theme = "catppuccin",
+        component_separators = { left = "|", right = "|" },
       },
       sections = {
         lualine_b = { "branch", "diff" },

@@ -26,11 +26,11 @@ vim.diagnostic.config({
 local inlayHints = {
   includeInlayParameterNameHints = "all",
   includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-  includeInlayFunctionParameterTypeHints = true,
-  includeInlayVariableTypeHints = true,
-  includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-  includeInlayPropertyDeclarationTypeHints = true,
-  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = false,
+  includeInlayVariableTypeHints = false,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+  includeInlayPropertyDeclarationTypeHints = false,
+  includeInlayFunctionLikeReturnTypeHints = false,
   includeInlayEnumMemberValueHints = true,
 }
 
@@ -73,3 +73,5 @@ vim.lsp.config("tailwindcss", {
     },
   },
 })
+
+vim.lsp.enable("copilot")

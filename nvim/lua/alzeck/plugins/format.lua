@@ -1,24 +1,5 @@
-local supported = {
-  "astro",
-  "css",
-  "graphql",
-  "handlebars",
-  "html",
-  "javascript",
-  "javascriptreact",
-  "json",
-  "jsonc",
-  "less",
-  "markdown",
-  "markdown.mdx",
-  "scss",
-  "typescript",
-  "typescriptreact",
-  "vue",
-  "yaml",
-}
+local with_biome = { "biome-check", "prettier", stop_after_first = true }
 return {
-
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
@@ -32,22 +13,42 @@ return {
         desc = "Format buffer",
       },
     },
-    opts = function(_, opts)
-      opts.formatters_by_ft = opts.formatters_by_ft
-        or {
-          lua = { "stylua", lsp_format = "never" },
-          python = { "autopep8" },
-        }
-      for _, ft in ipairs(supported) do
-        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "prettier")
-      end
+    ---@module 'conform'
+    ---@type conform.setupOpts
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua", lsp_format = "never" },
+        python = { "autopep8" },
+        astro = { "prettier" },
+        css = with_biome,
+        graphql = { "prettier" },
+        handlebars = { "prettier" },
+        html = { "prettier" },
+        javascript = with_biome,
+        javascriptreact = with_biome,
+        json = with_biome,
+        jsonc = with_biome,
+        less = { "prettier" },
+        markdown = { "prettier" },
+        ["markdown.mdx"] = { "prettier" },
+        scss = { "prettier" },
+        typescript = with_biome,
+        typescriptreact = with_biome,
+        vue = { "prettier" },
+        yaml = { "prettier" },
 
-      opts.format_on_save = opts.format_on_save or { timeout_ms = 5000 }
-      opts.default_format_opts = opts.default_format_opts or {
-        lsp_format = "fallback",
-      }
-      return opts
-    end,
+        ruby = { "standardrb" },
+        eruby = { "erb_format" },
+      },
+      formatters = {
+        biome = {
+          require_cwd = true,
+        },
+      },
+      format_on_save = { timeout_ms = 5000 },
+      default_format_opts = {
+        lsp_format = "fallback", -- use LSP if available, otherwise use a formatter
+      },
+    },
   },
 }

@@ -1,12 +1,11 @@
+-- Disable default mappings to make it work in terminal mode
+vim.g.tmux_navigator_no_mappings = 1
 return {
   {
     "theprimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local harpoon = require("harpoon")
-      harpoon:setup({})
-    end,
+    config = function() require("harpoon"):setup({}) end,
     keys = function()
       local append = function() require("harpoon"):list():add() end
       local toggle_quick_menu = function()
@@ -29,8 +28,8 @@ return {
         { "<C-s>", pick_window(2), desc = "Harpoon window 2" },
         { "<C-d>", pick_window(3), desc = "Harpoon window 3" },
         { "<C-f>", pick_window(4), desc = "Harpoon window 4" },
-        { "<C-H>p", prev, desc = "Harpoon previous" },
-        { "<C-H>n", next, desc = "Harpoon next" },
+        -- { "<C-H>p", prev, desc = "Harpoon previous" },
+        -- { "<C-H>n", next, desc = "Harpoon next" },
       }
     end,
   },
@@ -43,12 +42,19 @@ return {
       "TmuxNavigateRight",
       "TmuxNavigatePrevious",
     },
-    keys = {
-      { "<c-h>", function() vim.cmd("<C-U>TmuxNavigateLeft<cr>") end },
-      { "<c-j>", function() vim.cmd("<C-U>TmuxNavigateDown<cr>") end },
-      { "<c-k>", function() vim.cmd("<C-U>TmuxNavigateUp<cr>") end },
-      { "<c-l>", function() vim.cmd("<C-U>TmuxNavigateRight<cr>") end },
-      { "<c-\\>", function() vim.cmd("<C-U>TmuxNavigatePrevious<cr>") end },
-    },
+    keys = function()
+      return {
+        { mode = "n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>" },
+        { mode = "n", "<c-j>", "<cmd>TmuxNavigateDown<cr>" },
+        { mode = "n", "<c-k>", "<cmd>TmuxNavigateUp<cr>" },
+        { mode = "n", "<c-l>", "<cmd>TmuxNavigateRight<cr>" },
+        { mode = "n", "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
+        { mode = "t", "<c-h>", "<C-w><cmd>TmuxNavigateLeft<cr>" },
+        { mode = "t", "<c-j>", "<C-w><cmd>TmuxNavigateDown<cr>" },
+        { mode = "t", "<c-k>", "<C-w><cmd>TmuxNavigateUp<cr>" },
+        { mode = "t", "<c-l>", "<C-w><cmd>TmuxNavigateRight<cr>" },
+        { mode = "t", "<c-\\>", "<C-w><cmd>TmuxNavigatePrevious<cr>" },
+      }
+    end,
   },
 }

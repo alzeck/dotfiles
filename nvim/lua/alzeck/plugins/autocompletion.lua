@@ -16,21 +16,6 @@ autocmd("User", {
 
 return {
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "nvim-lua/plenary.nvim", branch = "master" },
-    },
-    build = "make tiktoken",
-    ---@module 'CopilotChat'
-    ---@type CopilotChat.config
-    opts = {
-      model = "claude-sonnet-4",
-    },
-    keys = {
-      { "<leader>cc", "<cmd>CopilotChatToggle<cr>", desc = "Copilot Chat" },
-    },
-  },
-  {
     "saghen/blink.cmp",
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
@@ -52,6 +37,9 @@ return {
       keymap = {
         preset = "default",
         ["<Tab>"] = {
+          function() -- sidekick next edit suggestion
+            return require("sidekick").nes_jump_or_apply()
+          end,
           function(cmp)
             if cmp.snippet_active() then
               return cmp.accept()

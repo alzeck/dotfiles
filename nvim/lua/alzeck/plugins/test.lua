@@ -5,7 +5,6 @@ return {
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
       "arthur944/neotest-bun",
     },
     config = function()

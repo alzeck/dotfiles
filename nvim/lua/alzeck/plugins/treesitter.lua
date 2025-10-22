@@ -120,8 +120,9 @@ return {
         "lua",
         "rust",
         "css",
-        "elixir",
-        "eex",
+        "ruby",
+        -- "elixir",
+        -- "eex",
       })
 
       install_and_start()

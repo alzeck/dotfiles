@@ -52,6 +52,10 @@ return {
         "jsonls",
         "basedpyright",
         "gopls",
+
+        "ruby_lsp",
+        "solargraph",
+        "standardrb",
       },
     },
   },
