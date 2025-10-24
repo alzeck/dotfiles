@@ -1,4 +1,4 @@
-local with_biome = { "biome-check", "prettier", stop_after_first = true }
+local with_biome = { "prettier" }
 return {
   {
     "stevearc/conform.nvim",
