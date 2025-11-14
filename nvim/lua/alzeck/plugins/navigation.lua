@@ -42,8 +42,7 @@ return {
       "TmuxNavigateRight",
       "TmuxNavigatePrevious",
     },
-    keys = function()
-      return {
+    keys =  {
         { mode = "n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>" },
         { mode = "n", "<c-j>", "<cmd>TmuxNavigateDown<cr>" },
         { mode = "n", "<c-k>", "<cmd>TmuxNavigateUp<cr>" },
@@ -54,7 +53,6 @@ return {
         { mode = "t", "<c-k>", "<C-w><cmd>TmuxNavigateUp<cr>" },
         { mode = "t", "<c-l>", "<C-w><cmd>TmuxNavigateRight<cr>" },
         { mode = "t", "<c-\\>", "<C-w><cmd>TmuxNavigatePrevious<cr>" },
-      }
-    end,
+    }
   },
 }

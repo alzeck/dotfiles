@@ -37,6 +37,7 @@ packages=(
     "fzf"           # Fuzzy finder (commonly used with tmux/nvim)
     "ripgrep"       # Fast grep (commonly used with nvim)
     "fd"            # Fast find (commonly used with nvim)
+    "tree-sitter-cli"
 )
 
 for package in "${packages[@]}"; do
@@ -56,13 +57,6 @@ else
     echo "✅ TPM already installed"
 fi
 
-# Set zsh as default shell if not already
-if [[ "$SHELL" != */zsh ]]; then
-    echo "🐚 Setting zsh as default shell..."
-    chsh -s "$(which zsh)"
-else
-    echo "✅ Zsh is already the default shell"
-fi
 
 # Use stow to symlink dotfiles
 echo "🔗 Symlinking dotfiles with stow..."

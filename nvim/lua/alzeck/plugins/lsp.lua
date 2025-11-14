@@ -51,11 +51,11 @@ return {
         "tailwindcss",
         "jsonls",
         "basedpyright",
-        "gopls",
+        -- "gopls",
 
         "ruby_lsp",
         "solargraph",
-        "standardrb",
+        "rubocop"
       },
     },
   },

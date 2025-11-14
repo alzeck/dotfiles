@@ -32,10 +32,10 @@ return {
   },
   keys = {
     -- Explorer
-    { "<leader><tab>", function() Snacks.explorer() end, desc = "File explorer" },
+    { "<leader><tab>", function() Snacks.explorer({ hidden = true, ignored = true }) end, desc = "File explorer" },
     { "<C-p>", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
     -- Grep
-    { "<leader>ps", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>ps", function() Snacks.picker.grep({ hidden = true }) end, desc = "Grep" },
     { "<leader>pS", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     -- Find
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
