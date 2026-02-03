@@ -65,9 +65,17 @@ local function install_and_start()
 
       if not check_installed(parser_name) then
         install(parser_name, function()
-          register_parser(parser_name)
-          vim.treesitter.start(bufnr)
-          vim.bo[bufnr].syntax = "on"
+          vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
+            -- Trigger runtimepath change to clear Neovim's query cache
+            -- (cache clears on OptionSet for runtimepath)
+            local rtp = vim.o.runtimepath
+            vim.o.runtimepath = rtp
+
+            -- Reload the buffer to pick up the new parser and queries
+            vim.api.nvim_buf_call(bufnr, function() vim.cmd.edit() end)
+          end)
         end)
       else
         -- Start treesitter for this buffer
