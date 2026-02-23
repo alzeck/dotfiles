@@ -47,6 +47,16 @@ return {
           },
         },
       },
+
+      spaces = {
+        components = "", -- string between components
+        left = " ", -- string at the start of the line
+        right = " ", -- string at the end of the line
+      },
+      sep = {
+        left = "", -- left separator of components
+        right = "", -- right separator of components
+      },
     },
   },
 }

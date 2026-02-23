@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+mode_file="${HOME}/.cache/alzeck/theme/mode"
+mode="dark"
+
+if [[ -f "${mode_file}" ]]; then
+  read -r raw_mode < "${mode_file}" || true
+  if [[ "${raw_mode}" == "light" || "${raw_mode}" == "dark" ]]; then
+    mode="${raw_mode}"
+  fi
+fi
+
+if [[ "${mode}" == "light" ]]; then
+  exec delta --light --paging=never --syntax-theme="Catppuccin Latte" "$@"
+fi
+
+exec delta --dark --paging=never --syntax-theme="Catppuccin Mocha" "$@"
