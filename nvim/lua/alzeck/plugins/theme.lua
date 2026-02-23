@@ -20,26 +20,32 @@ return {
     },
   },
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    "sschleemilch/slimline.nvim",
     event = "ColorScheme",
     opts = {
-      options = {
-        theme = "catppuccin",
-        component_separators = { left = "|", right = "|" },
-      },
-      sections = {
-        lualine_b = { "branch", "diff" },
-        lualine_c = {
-          {
-            "filename",
-            path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-          },
+      style = "fg",
+      components = {
+        right = {
           "diagnostics",
+          "filetype_lsp",
         },
-
-        lualine_x = { "filetype" },
-        lualine_y = {},
+      },
+      configs = {
+        path = {
+          hl = {
+            primary = "Label",
+          },
+        },
+        git = {
+          hl = {
+            primary = "Function",
+          },
+        },
+        filetype_lsp = {
+          hl = {
+            primary = "String",
+          },
+        },
       },
     },
   },

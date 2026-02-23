@@ -5,15 +5,15 @@ font-size = 16
 # font-feature=-dlig
 
 # theme = catppuccin-latte
-theme = catppuccin-mocha
-background-opacity = 0.6
+theme = "Catppuccin Mocha"
+background-opacity = 0.65
 # background = 0c0c0c
 background = 000000
-background-blur-radius = 255
+background-blur-radius = 200
 
 title = "Ghostty"
 macos-titlebar-style = tabs
-macos-titlebar-proxy-icon = hidden
+# macos-titlebar-proxy-icon = hidden
 
 # tmux + zsh 
 shell-integration = zsh
@@ -25,3 +25,12 @@ keybind = cmd+t=unbind
 keybind = cmd+n=unbind
 keybind = cmd+d=unbind
 keybind = cmd+shift+d=unbind
+
+macos-option-as-alt = left
+
+mouse-hide-while-typing = false
+copy-on-select = true
+confirm-close-surface = false
+link-url = true
+
+window-colorspace = display-p3

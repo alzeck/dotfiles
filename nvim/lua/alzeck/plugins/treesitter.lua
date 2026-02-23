@@ -1,91 +1,3 @@
----@param parser string
-local function check_installed(parser)
-  local treesitter = require("nvim-treesitter")
-  local parsers = treesitter.get_installed()
-  return vim.tbl_contains(parsers, parser)
-end
-
----@param parser string
----@param callback? fun()
-local function install(parser, callback)
-  local treesitter = require("nvim-treesitter")
-  if not check_installed(parser) then
-    treesitter.install({ parser }):await(function(err)
-      if not err and callback then callback() end
-    end)
-  end
-end
-
---- Register a filetype with a parser
----@param parser string
-local function register_parser(parser)
-  local filetypes = vim.treesitter.language.get_filetypes(parser)
-  if not vim.tbl_contains(filetypes, parser) then table.insert(filetypes, parser) end
-  -- register and start parsers for filetypes
-  vim.treesitter.language.register(parser, filetypes)
-end
-
---- Register parsers from opts.ensure_installed
---- @param ensure_installed table<number, string>
-local function register(ensure_installed)
-  local installed = require("nvim-treesitter").get_installed()
-  local not_installed = vim.tbl_filter(
-    function(parser) return not vim.tbl_contains(installed, parser) end,
-    ensure_installed
-  )
-  if #not_installed > 0 then
-    for _, parser in ipairs(not_installed) do
-      install(parser, function() register_parser(parser) end)
-    end
-  end
-
-  for _, parser in ipairs(ensure_installed) do
-    register_parser(parser)
-  end
-end
-
---- Install and start parsers for nvim-treesitter.
-local function install_and_start()
-  -- Auto-install and start treesitter parser for any buffer with a registered filetype
-  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    callback = function(event)
-      local bufnr = event.buf
-      local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-      -- Skip if no filetype
-      if filetype == "" then return end
-
-      -- Get parser name based on filetype
-      local parser_name = vim.treesitter.language.get_lang(filetype) -- might return filetype (not helpful)
-      if not parser_name then return end
-      -- Try to get existing parser (helpful check if filetype was returned above)
-      local parser_configs = require("nvim-treesitter.parsers")
-      if not parser_configs[parser_name] then
-        return -- Parser not available, skip silently
-      end
-
-      if not check_installed(parser_name) then
-        install(parser_name, function()
-          vim.schedule(function()
-            if not vim.api.nvim_buf_is_valid(bufnr) then return end
-
-            -- Trigger runtimepath change to clear Neovim's query cache
-            -- (cache clears on OptionSet for runtimepath)
-            local rtp = vim.o.runtimepath
-            vim.o.runtimepath = rtp
-
-            -- Reload the buffer to pick up the new parser and queries
-            vim.api.nvim_buf_call(bufnr, function() vim.cmd.edit() end)
-          end)
-        end)
-      else
-        -- Start treesitter for this buffer
-        vim.treesitter.start(bufnr)
-        vim.bo[bufnr].syntax = "on"
-      end
-    end,
-  })
-end
-
 return {
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -106,19 +18,23 @@ return {
       multiwindow = false,
     },
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    lazy = false,
-    -- cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    -- event = { "VeryLazy" },
-    -- clazy = vim.fn.argc(-1) == 0,
     build = ":TSUpdate",
     dependencies = {},
-    config = function()
-      local tree_sitter = require("nvim-treesitter")
-      tree_sitter.setup()
-      register({
+  },
+
+  {
+    "MeanderingProgrammer/treesitter-modules.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ---@module 'treesitter-modules'
+    ---@type ts.mod.UserConfig
+    opts = {
+      -- list of parser names, or 'all', that must be installed
+      ensure_installed = {
+        "vim",
         "vimdoc",
         "javascript",
         "typescript",
@@ -131,9 +47,22 @@ return {
         "ruby",
         -- "elixir",
         -- "eex",
-      })
-
-      install_and_start()
-    end,
+      },
+      -- list of parser names, or 'all', to ignore installing
+      ignore_install = {},
+      -- install parsers in ensure_installed synchronously
+      -- automatically install missing parsers when entering buffer
+      auto_install = true,
+      fold = {
+        enable = true,
+      },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = true,
+      },
+      indent = {
+        enable = true,
+      },
+    },
   },
 }
