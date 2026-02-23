@@ -1,19 +1,12 @@
 # style
 font-size = 16
-# font-feature=-liga
-# font-feature=-calt
-# font-feature=-dlig
 
-# theme = catppuccin-latte
-theme = "Catppuccin Mocha"
 config-file = "?~/.cache/alzeck/theme/ghostty.conf"
 # background/opacity are managed by ~/.config/ghostty/bin/theme-toggle
-# background = 0c0c0c
 background-blur-radius = 200
 
-title = "Ghostty"
-macos-titlebar-style = tabs
-# macos-titlebar-proxy-icon = hidden
+title = " "
+macos-titlebar-style = transparent
 
 # tmux + zsh 
 shell-integration = zsh
