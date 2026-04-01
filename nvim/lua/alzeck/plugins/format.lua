@@ -40,11 +40,7 @@ return {
         ruby = { "standardrb" },
         eruby = { "erb_format" },
       },
-      formatters = {
-        biome = {
-          require_cwd = true,
-        },
-      },
+      formatters = {},
       format_on_save = { timeout_ms = 5000 },
       default_format_opts = {
         lsp_format = "fallback", -- use LSP if available, otherwise use a formatter

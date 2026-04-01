@@ -77,9 +77,3 @@ vim.api.nvim_create_autocmd({ "FocusGained", "CursorHold" }, {
 })
 
 refresh_theme_from_state(true)
-
-vim.filetype.add({
-  extension = {
-    mdx = "markdown.mdx",
-  },
-})
