@@ -37,7 +37,7 @@ return {
         vue = { "prettier" },
         yaml = { "prettier" },
 
-        ruby = { "standardrb" },
+        ruby = { "rubocop" },
         eruby = { "erb_format" },
       },
       formatters = {},
