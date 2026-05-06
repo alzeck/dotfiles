@@ -28,4 +28,5 @@ copy-on-select = true
 confirm-close-surface = false
 link-url = true
 
+font-thicken = true
 window-colorspace = display-p3
