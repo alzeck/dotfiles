@@ -65,12 +65,6 @@ return {
         mode = { "n", "x", "i", "t" },
         desc = "Sidekick Switch Focus",
       },
-      -- Example of a keybinding to open Claude directly
-      {
-        "<leader>ac",
-        function() require("sidekick.cli").toggle({ name = "copilot", focus = true }) end,
-        desc = "Sidekick Toggle Claude",
-      },
     },
   },
 }
